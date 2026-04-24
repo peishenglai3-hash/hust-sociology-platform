@@ -20,7 +20,7 @@ export default function FeatureCard({
 }: FeatureCardProps) {
   return (
     <Link href={href}>
-      <a className="group block h-full">
+      <div className="group block h-full">
         <div
           className={`
             h-full rounded-xl border border-border bg-gradient-to-br ${gradient}
@@ -47,7 +47,7 @@ export default function FeatureCard({
             <ArrowRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
           </div>
         </div>
-      </a>
+      </div>
     </Link>
   );
 }
