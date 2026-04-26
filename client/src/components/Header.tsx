@@ -6,9 +6,11 @@ export default function Header() {
       <div className="flex items-center justify-between h-16 px-4 lg:px-8">
         {/* Left: Logo/Title (hidden on mobile due to sidebar) */}
         <div className="hidden lg:flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
-            <span className="text-white font-bold">S</span>
-          </div>
+          <img
+            src="/manus-storage/hust-sociology-logo_1803912d.webp"
+            alt="华中科技大学社会学院"
+            className="w-12 h-12 object-contain"
+          />
           <div>
             <h1 className="text-lg font-bold text-foreground">社会学院平台</h1>
             <p className="text-xs text-muted-foreground">信息整合与管理</p>

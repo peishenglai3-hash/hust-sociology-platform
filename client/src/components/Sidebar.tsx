@@ -65,10 +65,10 @@ export default function Sidebar() {
       <div className="fixed top-4 left-4 z-50 lg:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="p-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+          className="p-2 rounded-lg bg-white border border-border hover:bg-secondary transition-colors shadow-md"
           aria-label="Toggle menu"
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
         </button>
       </div>
 
@@ -93,9 +93,11 @@ export default function Sidebar() {
           {/* Logo section */}
           <div className="px-6 pb-8 border-b border-sidebar-border">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">S</span>
-              </div>
+              <img
+                src="/manus-storage/hust-sociology-logo_1803912d.webp"
+                alt="华中科技大学社会学院"
+                className="w-12 h-12 object-contain"
+              />
               <div>
                 <h1 className="text-sm font-bold text-sidebar-foreground">社会学院</h1>
                 <p className="text-xs text-muted-foreground">信息平台</p>
