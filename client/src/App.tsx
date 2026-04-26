@@ -4,8 +4,11 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Academic from "./pages/Academic";
 import Review from "./pages/Review";
@@ -16,6 +19,19 @@ import Calendar from "./pages/Calendar";
 import MentorDetail from "./pages/MentorDetail";
 
 function Router() {
+  const { user } = useAuth();
+
+  // 如果未登录，只显示登录页
+  if (!user) {
+    return (
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route component={Login} />
+      </Switch>
+    );
+  }
+
+  // 已登录，显示完整应用
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
       <Sidebar />
@@ -49,13 +65,13 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+      <ThemeProvider defaultTheme="light">
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </AuthProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
