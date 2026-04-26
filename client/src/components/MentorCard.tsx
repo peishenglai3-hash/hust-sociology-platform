@@ -1,6 +1,8 @@
-import { Mail, MapPin, BookOpen } from 'lucide-react';
+import { Mail, MapPin, BookOpen, Star, ArrowRight } from 'lucide-react';
 import { Mentor } from '@/data/mentors';
+import { getMentorReviews, getMentorAverageRating } from '@/data/reviews';
 import { useState } from 'react';
+import { Link } from 'wouter';
 
 interface MentorCardProps {
   mentor: Mentor;
@@ -8,6 +10,8 @@ interface MentorCardProps {
 
 export default function MentorCard({ mentor }: MentorCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const reviews = getMentorReviews(mentor.id);
+  const averageRating = getMentorAverageRating(mentor.id);
 
   return (
     <div className="rounded-lg border border-border bg-card hover:shadow-md transition-all duration-300 overflow-hidden group">
@@ -17,6 +21,21 @@ export default function MentorCard({ mentor }: MentorCardProps) {
           <div>
             <h3 className="text-lg font-semibold text-foreground">{mentor.name}</h3>
             <p className="text-sm font-medium text-primary">{mentor.title}</p>
+            {reviews.length > 0 && (
+              <div className="flex items-center gap-1 mt-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star
+                    key={i}
+                    className={`w-3 h-3 ${
+                      i < Math.round(Number(averageRating))
+                        ? 'fill-yellow-400 text-yellow-400'
+                        : 'text-muted-foreground'
+                    }`}
+                  />
+                ))}
+                <span className="text-xs text-muted-foreground ml-1">({reviews.length})</span>
+              </div>
+            )}
           </div>
           {mentor.gender && (
             <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">
@@ -90,15 +109,21 @@ export default function MentorCard({ mentor }: MentorCardProps) {
           </div>
         )}
 
-        {/* Expand Button */}
-        {(mentor.achievements || mentor.bio) && (
+        {/* Action Buttons */}
+        <div className="flex gap-2 mt-3 pt-3 border-t border-border">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="w-full mt-3 pt-3 border-t border-border text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            className="flex-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
           >
-            {isExpanded ? '收起详情' : '查看详情'}
+            {isExpanded ? '收起' : '详情'}
           </button>
-        )}
+          <Link href={`/mentor/${mentor.id}`}>
+            <a className="flex-1 flex items-center justify-center gap-1 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded transition-colors">
+              查看全部
+              <ArrowRight className="w-3 h-3" />
+            </a>
+          </Link>
+        </div>
       </div>
 
       {/* Expanded Content */}

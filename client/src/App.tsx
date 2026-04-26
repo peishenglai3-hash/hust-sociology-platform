@@ -13,6 +13,7 @@ import Policies from "./pages/Policies";
 import Mentors from "./pages/Mentors";
 import Guide from "./pages/Guide";
 import Calendar from "./pages/Calendar";
+import MentorDetail from "./pages/MentorDetail";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
             <Route path="/review" component={Review} />
             <Route path="/policies" component={Policies} />
             <Route path="/mentors" component={Mentors} />
+            <Route path="/mentor/:id" component={MentorDetail} />
             <Route path="/guide" component={Guide} />
             <Route path="/calendar" component={Calendar} />
             <Route path="/404" component={NotFound} />
