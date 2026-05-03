@@ -19,7 +19,7 @@ const resources: ReviewResource[] = [
     description: '包含考试复习指南、重点知识总结、历年真题等，帮助你系统复习社会调查方法课程',
     category: '复习指南',
     author: '教学团队整理',
-    link: '#', // 待补充网盘链接
+    link: 'https://pan.quark.cn/s/ad7059ece05a',
     icon: <GraduationCap className="w-5 h-5" />,
   },
   // 后续可添加更多复习资料
