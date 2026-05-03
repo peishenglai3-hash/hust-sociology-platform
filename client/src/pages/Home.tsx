@@ -1,8 +1,13 @@
 import { BookOpen, GraduationCap, FileText, Users, Lightbulb, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FeatureCard from '@/components/FeatureCard';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  const { user } = useAuth();
+
   const features = [
     {
       title: '学术资料',
