@@ -22,6 +22,15 @@ const resources: AcademicResource[] = [
     link: 'https://pan.quark.cn/s/eb0c975281fc',
     icon: <BookOpen className="w-5 h-5" />,
   },
+  {
+    id: 'sociology-intro-materials',
+    title: '社会学概论 资料',
+    description: '社会学概论课程的学习资料，包含课程讲义、笔记整理、重点总结等，是学习社会学理论基础的重要资源',
+    category: '课程资料',
+    author: '教学团队整理',
+    link: 'https://pan.baidu.com/s/1LwfpzOa1VX9eZuS3vuA19w?pwd=bfjw',
+    icon: <BookOpen className="w-5 h-5" />,
+  },
 ];
 
 export default function Academic() {
