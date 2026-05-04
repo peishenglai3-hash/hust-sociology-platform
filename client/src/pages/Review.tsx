@@ -22,6 +22,15 @@ const resources: ReviewResource[] = [
     link: 'https://pan.quark.cn/s/ad7059ece05a',
     icon: <GraduationCap className="w-5 h-5" />,
   },
+  {
+    id: 'sociology-intro-review',
+    title: '大一上学期概论课复习资料',
+    description: '社会学概论、社会学理论基础等课程的复习资料，包含课程笔记、重点总结、考试指南',
+    category: '复习指南',
+    author: '教学团队整理',
+    link: 'https://pan.quark.cn/s/88199f523174',
+    icon: <GraduationCap className="w-5 h-5" />,
+  },
   // 后续可添加更多复习资料
 ];
 
