@@ -31,6 +31,24 @@ const resources: AcademicResource[] = [
     link: 'https://pan.baidu.com/s/1LwfpzOa1VX9eZuS3vuA19w?pwd=bfjw',
     icon: <BookOpen className="w-5 h-5" />,
   },
+  {
+    id: 'python-course-ppt',
+    title: 'Python课程PPT资源',
+    description: 'Python编程课程的完整PPT讲义，涵盖基础语法、数据结构、函数编程等核心内容，适合初学者学习',
+    category: '课程资料',
+    author: '教学团队整理',
+    link: 'https://pan.quark.cn/s/72f7cccc8449',
+    icon: <BookOpen className="w-5 h-5" />,
+  },
+  {
+    id: 'computational-sociology',
+    title: '计算社会科学',
+    description: '计算社会科学的理论与方法资料，包含社会网络分析、大数据社会学、计算模型等前沿研究方向',
+    category: '前沿研究',
+    author: '教学团队整理',
+    link: 'https://pan.quark.cn/s/f5871b6f7f71',
+    icon: <BookOpen className="w-5 h-5" />,
+  },
 ];
 
 export default function Academic() {

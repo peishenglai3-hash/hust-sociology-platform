@@ -39,6 +39,17 @@ const resources: ReviewResource[] = [
     link: 'https://pan.quark.cn/s/88199f523174',
     icon: <GraduationCap className="w-5 h-5" />,
   },
+  {
+    id: 'calculus-lecture-notes',
+    title: '微积分讲义',
+    description: '微积分课程的完整讲义资料，包含极限、导数、积分等核心概念和例题详解',
+    category: '课程讲义',
+    grade: '大一上',
+    courseName: '微积分',
+    author: '教学团队整理',
+    link: 'https://pan.quark.cn/s/864be63e9db1',
+    icon: <GraduationCap className="w-5 h-5" />,
+  },
 ];
 
 // 提取所有年级和课程名称用于筛选
