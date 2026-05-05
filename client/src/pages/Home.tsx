@@ -1,4 +1,4 @@
-import { BookOpen, GraduationCap, FileText, Users, Lightbulb, Calendar } from 'lucide-react';
+import { BookOpen, GraduationCap, FileText, Users, Lightbulb, Calendar, TrendingUp, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FeatureCard from '@/components/FeatureCard';
 import { useAuth } from '@/contexts/AuthContext';
@@ -106,11 +106,11 @@ export default function Home() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-4 pt-8 border-t border-border">
                 <div>
-                  <div className="text-2xl font-bold text-primary">312</div>
+                  <div className="text-2xl font-bold text-primary">7</div>
                   <p className="text-sm text-muted-foreground">资源总数</p>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-primary">24</div>
+                  <div className="text-2xl font-bold text-primary">45</div>
                   <p className="text-sm text-muted-foreground">导师信息</p>
                 </div>
                 <div>
@@ -131,6 +131,49 @@ export default function Home() {
                   <p className="text-sm text-muted-foreground">华中科技大学社会学院</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Resource Statistics Section */}
+      <section className="py-12 lg:py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* 复习资料统计 */}
+            <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition-shadow">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <p className="text-gray-600 text-sm font-medium mb-1">复习资料</p>
+                  <div className="text-3xl font-bold text-blue-600">3</div>
+                </div>
+                <GraduationCap className="w-8 h-8 text-blue-500 opacity-20" />
+              </div>
+              <p className="text-xs text-gray-500">社会调查方法、概论课、微积分讲义</p>
+            </div>
+
+            {/* 学术资料统计 */}
+            <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-indigo-500 hover:shadow-lg transition-shadow">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <p className="text-gray-600 text-sm font-medium mb-1">学术资料</p>
+                  <div className="text-3xl font-bold text-indigo-600">4</div>
+                </div>
+                <BookOpen className="w-8 h-8 text-indigo-500 opacity-20" />
+              </div>
+              <p className="text-xs text-gray-500">科技社会学、社会学概论、Python、计算社会科学</p>
+            </div>
+
+            {/* 最新更新时间 */}
+            <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition-shadow">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <p className="text-gray-600 text-sm font-medium mb-1">最新更新</p>
+                  <div className="text-lg font-bold text-green-600">2026年5月5日</div>
+                </div>
+                <Clock className="w-8 h-8 text-green-500 opacity-20" />
+              </div>
+              <p className="text-xs text-gray-500">添加了Python课程PPT和微积分讲义</p>
             </div>
           </div>
         </div>
