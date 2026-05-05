@@ -1,4 +1,6 @@
-import { BookOpen, Download, ExternalLink } from 'lucide-react';
+'use client';
+
+import { BookOpen, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
@@ -7,6 +9,7 @@ interface AcademicResource {
   title: string;
   description: string;
   category: string;
+  grade?: string;
   author?: string;
   link: string;
   icon: React.ReactNode;
@@ -16,36 +19,40 @@ const resources: AcademicResource[] = [
   {
     id: 'tech-sociology-books',
     title: '科技社会学专业书籍库',
-    description: '包含科技社会学领域的经典著作和最新研究成果，涵盖科技与社会的交互、创新社会学等核心主题',
+    description: '包含科技社会学领域的经典著作和最新研究成果，涵盖科技与社会的交互、创新社会学等核心主题，是深入学习科技社会学的必备资源',
     category: '专业书籍',
-    author: '赖培胜整理',
+    grade: '大一及以上',
+    author: '赖培胜整理 | 教学团队素材',
     link: 'https://pan.quark.cn/s/eb0c975281fc',
     icon: <BookOpen className="w-5 h-5" />,
   },
   {
     id: 'sociology-intro-materials',
-    title: '社会学概论 资料',
-    description: '社会学概论课程的学习资料，包含课程讲义、笔记整理、重点总结等，是学习社会学理论基础的重要资源',
+    title: '社会学概论 学习资料',
+    description: '社会学概论课程的完整学习资料，包含课程讲义、笔记整理、重点总结等，是学习社会学理论基础的必读资源',
     category: '课程资料',
-    author: '教学团队整理',
+    grade: '大一',
+    author: '赖培胜整理 | 教学团队素材',
     link: 'https://pan.baidu.com/s/1LwfpzOa1VX9eZuS3vuA19w?pwd=bfjw',
     icon: <BookOpen className="w-5 h-5" />,
   },
   {
     id: 'python-course-ppt',
-    title: 'Python课程PPT资源',
-    description: 'Python编程课程的完整PPT讲义，涵盖基础语法、数据结构、函数编程等核心内容，适合初学者学习',
+    title: 'Python编程完整讲义',
+    description: 'Python编程课程的完整PPT讲义，从基础语法、数据结构到函数编程，详细讲解每个知识点，适合初学者快速上手',
     category: '课程资料',
-    author: '教学团队整理',
+    grade: '大一',
+    author: '赖培胜整理 | 教学团队素材',
     link: 'https://pan.quark.cn/s/72f7cccc8449',
     icon: <BookOpen className="w-5 h-5" />,
   },
   {
     id: 'computational-sociology',
-    title: '计算社会科学',
-    description: '计算社会科学的理论与方法资料，包含社会网络分析、大数据社会学、计算模型等前沿研究方向',
+    title: '计算社会科学前沿研究',
+    description: '计算社会科学的理论与方法资料，包含社会网络分析、大数据社会学、计算模型等前沿研究方向，带你了解社会学的新领域',
     category: '前沿研究',
-    author: '教学团队整理',
+    grade: '大一及以上',
+    author: '赖培胜整理 | 教学团队素材',
     link: 'https://pan.quark.cn/s/f5871b6f7f71',
     icon: <BookOpen className="w-5 h-5" />,
   },
@@ -58,79 +65,73 @@ export default function Academic() {
         {/* 页面头部 */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-3 bg-blue-100 rounded-lg">
-              <BookOpen className="w-8 h-8 text-blue-600" />
-            </div>
-            <h1 className="text-4xl font-bold text-gray-900">学术资料</h1>
+            <BookOpen className="w-8 h-8 text-blue-600" />
+            <h1 className="text-4xl font-bold text-gray-900">学术资料库</h1>
           </div>
           <p className="text-lg text-gray-600">
-            课程讲义、研究论文、学术资源库 - 为你的学术研究提供全面支持
+            精选的专业书籍和学术资源，让你的学习更深入、更专业 📚
           </p>
         </div>
 
         {/* 资料卡片网格 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {resources.map((resource) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {resources.map(resource => (
             <Card
               key={resource.id}
-              className="group hover:shadow-lg transition-all duration-300 overflow-hidden border-0 bg-white"
+              className="bg-white shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col"
             >
-              <div className="p-6">
-                {/* 资源类型标签 */}
-                <div className="flex items-center justify-between mb-3">
-                  <span className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
-                    {resource.icon}
-                    {resource.category}
-                  </span>
+              <div className="p-6 flex flex-col h-full">
+                {/* 头部 */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {resource.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
+                        {resource.category}
+                      </span>
+                      {resource.grade && (
+                        <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">
+                          {resource.grade}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  {resource.icon}
                 </div>
 
-                {/* 资源标题 */}
-                <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
-                  {resource.title}
-                </h3>
-
-                {/* 资源描述 */}
-                <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                {/* 描述 */}
+                <p className="text-gray-700 mb-4 flex-grow leading-relaxed">
                   {resource.description}
                 </p>
 
-                {/* 作者信息 */}
-                {resource.author && (
-                  <p className="text-xs text-gray-500 mb-4">
-                    📌 {resource.author}
-                  </p>
+                {/* 来源信息 */}
+                <p className="text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200">
+                  整理: {resource.author}
+                </p>
+
+                {/* 访问按钮 */}
+                {resource.link && (
+                  <a
+                    href={resource.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-md hover:shadow-lg"
+                  >
+                    <span>访问资料库</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
                 )}
-
-                {/* 下载按钮 */}
-                <Button
-                  onClick={() => window.open(resource.link, '_blank')}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-2 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 group-hover:shadow-md"
-                >
-                  <Download className="w-4 h-4" />
-                  访问资料库
-                  <ExternalLink className="w-4 h-4" />
-                </Button>
               </div>
-
-              {/* 卡片底部装饰 */}
-              <div className="h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
             </Card>
           ))}
         </div>
 
-        {/* 空状态提示 */}
-        {resources.length === 0 && (
-          <div className="text-center py-12">
-            <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 text-lg">暂无学术资料，敬请期待</p>
-          </div>
-        )}
-
-        {/* 底部说明 */}
-        <div className="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-          <h3 className="font-semibold text-gray-900 mb-2">📚 资料说明</h3>
-          <p className="text-gray-700 text-sm">
-            点击"访问资料库"按钮即可进入网盘，选择需要的资料进行下载。所有资料均为永久有效链接，可随时访问。
+        {/* 提示信息 */}
+        <div className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6">
+          <p className="text-sm text-gray-800">
+            💡 <span className="font-semibold">小提示：</span> 这些资料都是精心整理的精品资源，希望能帮助你更好地学习。如果你有好的学习资源或建议，欢迎通过"学习指南"页面反馈给我们！
           </p>
         </div>
       </div>
