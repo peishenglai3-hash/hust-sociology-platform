@@ -52,12 +52,26 @@ const resources: ReviewResource[] = [
     link: 'https://pan.quark.cn/s/864be63e9db1',
     icon: <GraduationCap className="w-5 h-5" />,
   },
+  {
+    id: 'party-activist-theory-test',
+    title: '入党积极分子理论测试题库',
+    description: '为想要入党的同学精心准备的理论测试题库，包含党的基本知识、理论考点、模拟试题等，帮你充分准备入党考试',
+    category: '理论测试',
+    grade: '大一上',
+    courseName: '党建理论',
+    author: '党建工作负责同学上传',
+    link: 'https://pan.quark.cn/s/1ddea94a9ae2',
+    icon: <GraduationCap className="w-5 h-5" />,
+  },
 ];
 
 // 提取所有年级和课程名称用于筛选
 const allGrades = Array.from(new Set(resources.map(r => r.grade))).sort();
 const allCourses = Array.from(new Set(resources.map(r => r.courseName))).sort();
 const allCategories = Array.from(new Set(resources.map(r => r.category))).sort();
+
+// 更新首页统计数据
+const totalReviewResources = resources.length;
 
 export default function Review() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -212,10 +226,10 @@ export default function Review() {
                     {resource.description}
                   </p>
 
-                  {/* 来源信息 */}
-                  <p className="text-xs text-gray-500 mb-4">
-                    整理: {resource.author}
-                  </p>
+                {/* 来源信息 */}
+                <p className="text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200">
+                  {resource.author?.includes('党建工作') ? '上传者: ' : '整理: '}{resource.author}
+                </p>
 
                   {/* 下载按钮 */}
                   {resource.link && (

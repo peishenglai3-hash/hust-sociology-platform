@@ -145,11 +145,11 @@ export default function Home() {
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <p className="text-gray-600 text-sm font-medium mb-1">复习资料</p>
-                  <div className="text-3xl font-bold text-blue-600">3</div>
+                  <div className="text-3xl font-bold text-blue-600">4</div>
                 </div>
                 <GraduationCap className="w-8 h-8 text-blue-500 opacity-20" />
               </div>
-              <p className="text-xs text-gray-500">社会调查方法、概论课、微积分讲义</p>
+              <p className="text-xs text-gray-500">社会调查方法、概论课、微积分、入党积极分子理论</p>
             </div>
 
             {/* 学术资料统计 */}
@@ -173,7 +173,7 @@ export default function Home() {
                 </div>
                 <Clock className="w-8 h-8 text-green-500 opacity-20" />
               </div>
-              <p className="text-xs text-gray-500">添加了Python课程PPT和微积分讲义</p>
+              <p className="text-xs text-gray-500">添加了入党积极分子理论测试题库</p>
             </div>
           </div>
         </div>
