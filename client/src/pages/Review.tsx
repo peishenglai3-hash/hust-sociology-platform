@@ -14,6 +14,7 @@ interface ReviewResource {
   grade: string; // 年级：大一上、大一下、大二上、大二下等
   courseName: string; // 课程名称
   author?: string;
+  contributorType?: 'organizer' | 'contributor'; // 贡献者类型：组织者或贡献者
   link?: string;
   icon: React.ReactNode;
 }
@@ -26,18 +27,20 @@ const resources: ReviewResource[] = [
     category: '考试复习',
     grade: '大一上',
     courseName: '社会调查方法',
-    author: '赖培胜整理 | 教学团队素材',
+    author: '赖培胜',
+    contributorType: 'organizer',
     link: 'https://pan.quark.cn/s/ad7059ece05a',
     icon: <GraduationCap className="w-5 h-5" />,
   },
   {
     id: 'sociology-intro-review',
     title: '大一上学期概论课复习资料',
-    description: '《社会学概论》《社会工作概论》两门课的完整复习资料，包括课程笔记、重点总结、考试指南，一站式搞定两门概论课',
+    description: '《社会学概论》《社会工作概论》两门课的完整复习资料，包括课程笔记、重点总结、考试指南，一站式搠定两门概论课',
     category: '考试复习',
     grade: '大一上',
     courseName: '社会学概论 / 社会工作概论',
-    author: '赖培胜整理 | 教学团队素材',
+    author: '赖培胜',
+    contributorType: 'organizer',
     link: 'https://pan.quark.cn/s/88199f523174',
     icon: <GraduationCap className="w-5 h-5" />,
   },
@@ -48,7 +51,8 @@ const resources: ReviewResource[] = [
     category: '课程讲义',
     grade: '大一上',
     courseName: '微积分',
-    author: '赖培胜整理 | 教学团队素材',
+    author: '赖培胜',
+    contributorType: 'organizer',
     link: 'https://pan.quark.cn/s/864be63e9db1',
     icon: <GraduationCap className="w-5 h-5" />,
   },
@@ -59,10 +63,11 @@ const resources: ReviewResource[] = [
     category: '理论测试',
     grade: '大一上',
     courseName: '党建理论',
-    author: '党建工作负责同学上传',
+    author: '党建工作负责同学',
+    contributorType: 'contributor',
     link: 'https://pan.quark.cn/s/1ddea94a9ae2',
     icon: <GraduationCap className="w-5 h-5" />,
-  },
+  }
 ];
 
 // 提取所有年级和课程名称用于筛选
@@ -211,6 +216,17 @@ export default function Review() {
                         <span className="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">
                           {resource.category}
                         </span>
+                        {/* 贡献者标签 */}
+                        {resource.contributorType === 'organizer' && (
+                          <span className="inline-block px-2 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded">
+                            👤 组织者
+                          </span>
+                        )}
+                        {resource.contributorType === 'contributor' && (
+                          <span className="inline-block px-2 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded">
+                            ⭐ 贡献者
+                          </span>
+                        )}
                       </div>
                     </div>
                     {resource.icon}
@@ -226,10 +242,15 @@ export default function Review() {
                     {resource.description}
                   </p>
 
-                {/* 来源信息 */}
-                <p className="text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200">
-                  {resource.author?.includes('党建工作') ? '上传者: ' : '整理: '}{resource.author}
-                </p>
+                {/* 贡献者信息 */}
+                <div className="mb-4 pb-4 border-b border-gray-200">
+                  <p className="text-xs text-gray-600 font-medium mb-1">
+                    {resource.contributorType === 'organizer' ? '📚 资料整理者' : '🎯 资料贡献者'}
+                  </p>
+                  <p className="text-xs text-gray-700 font-semibold">
+                    {resource.author}
+                  </p>
+                </div>
 
                   {/* 下载按钮 */}
                   {resource.link && (

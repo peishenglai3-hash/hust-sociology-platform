@@ -1,9 +1,7 @@
 'use client';
-
 import { BookOpen, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-
 interface AcademicResource {
   id: string;
   title: string;
@@ -11,10 +9,10 @@ interface AcademicResource {
   category: string;
   grade?: string;
   author?: string;
+  contributorType?: 'organizer' | 'contributor';
   link: string;
   icon: React.ReactNode;
 }
-
 const resources: AcademicResource[] = [
   {
     id: 'tech-sociology-books',
@@ -22,7 +20,8 @@ const resources: AcademicResource[] = [
     description: '包含科技社会学领域的经典著作和最新研究成果，涵盖科技与社会的交互、创新社会学等核心主题，是深入学习科技社会学的必备资源',
     category: '专业书籍',
     grade: '大一及以上',
-    author: '赖培胜整理 | 教学团队素材',
+    author: '赖培胜',
+    contributorType: 'organizer',
     link: 'https://pan.quark.cn/s/eb0c975281fc',
     icon: <BookOpen className="w-5 h-5" />,
   },
@@ -32,7 +31,8 @@ const resources: AcademicResource[] = [
     description: '社会学概论课程的完整学习资料，包含课程讲义、笔记整理、重点总结等，是学习社会学理论基础的必读资源',
     category: '课程资料',
     grade: '大一',
-    author: '赖培胜整理 | 教学团队素材',
+    author: '赖培胜',
+    contributorType: 'organizer',
     link: 'https://pan.baidu.com/s/1LwfpzOa1VX9eZuS3vuA19w?pwd=bfjw',
     icon: <BookOpen className="w-5 h-5" />,
   },
@@ -42,7 +42,8 @@ const resources: AcademicResource[] = [
     description: 'Python编程课程的完整PPT讲义，从基础语法、数据结构到函数编程，详细讲解每个知识点，适合初学者快速上手',
     category: '课程资料',
     grade: '大一',
-    author: '赖培胜整理 | 教学团队素材',
+    author: '赖培胜',
+    contributorType: 'organizer',
     link: 'https://pan.quark.cn/s/72f7cccc8449',
     icon: <BookOpen className="w-5 h-5" />,
   },
@@ -52,12 +53,12 @@ const resources: AcademicResource[] = [
     description: '计算社会科学的理论与方法资料，包含社会网络分析、大数据社会学、计算模型等前沿研究方向，带你了解社会学的新领域',
     category: '前沿研究',
     grade: '大一及以上',
-    author: '赖培胜整理 | 教学团队素材',
+    author: '赖培胜',
+    contributorType: 'organizer',
     link: 'https://pan.quark.cn/s/f5871b6f7f71',
     icon: <BookOpen className="w-5 h-5" />,
   },
 ];
-
 export default function Academic() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -72,7 +73,6 @@ export default function Academic() {
             精选的专业书籍和学术资源，让你的学习更深入、更专业 📚
           </p>
         </div>
-
         {/* 资料卡片网格 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {resources.map(resource => (
@@ -96,21 +96,34 @@ export default function Academic() {
                           {resource.grade}
                         </span>
                       )}
+                      {/* 贡献者标签 */}
+                      {resource.contributorType === 'organizer' && (
+                        <span className="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">
+                          👤 组织者
+                        </span>
+                      )}
+                      {resource.contributorType === 'contributor' && (
+                        <span className="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">
+                          ⭐ 贡献者
+                        </span>
+                      )}
                     </div>
                   </div>
                   {resource.icon}
                 </div>
-
                 {/* 描述 */}
                 <p className="text-gray-700 mb-4 flex-grow leading-relaxed">
                   {resource.description}
                 </p>
-
-                {/* 来源信息 */}
-                <p className="text-xs text-gray-500 mb-4 pb-4 border-b border-gray-200">
-                  整理: {resource.author}
-                </p>
-
+                {/* 贡献者信息 */}
+                <div className="mb-4 pb-4 border-b border-gray-200">
+                  <p className="text-xs text-gray-600 font-medium mb-1">
+                    {resource.contributorType === 'organizer' ? '📚 资料整理者' : '🎯 资料贡献者'}
+                  </p>
+                  <p className="text-xs text-gray-700 font-semibold">
+                    {resource.author}
+                  </p>
+                </div>
                 {/* 访问按钮 */}
                 {resource.link && (
                   <a
@@ -127,7 +140,6 @@ export default function Academic() {
             </Card>
           ))}
         </div>
-
         {/* 提示信息 */}
         <div className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6">
           <p className="text-sm text-gray-800">
