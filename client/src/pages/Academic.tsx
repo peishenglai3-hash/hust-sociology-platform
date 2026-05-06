@@ -58,6 +58,17 @@ const resources: AcademicResource[] = [
     link: 'https://pan.quark.cn/s/f5871b6f7f71',
     icon: <BookOpen className="w-5 h-5" />,
   },
+  {
+    id: 'marxist-sociology',
+    title: '马克思主义社会学',
+    description: '深入学习马克思主义社会学理论，包含经典著作、理论分析和当代应用，是理解社会结构和社会发展的重要资源',
+    category: '理论研究',
+    grade: '大一及以上',
+    author: '赖培胜',
+    contributorType: 'organizer',
+    link: 'https://pan.quark.cn/s/b0840174d1c2',
+    icon: <BookOpen className="w-5 h-5" />,
+  },
 ];
 export default function Academic() {
   return (
