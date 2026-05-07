@@ -93,20 +93,31 @@ export default function Sidebar() {
         `}
       >
         <div className="flex flex-col h-full pt-20 lg:pt-6">
-          {/* Logo section */}
+          {/* Logo section with collapse button */}
           <div className={`${isDesktopCollapsed ? 'px-3' : 'px-6'} pb-8 border-b border-sidebar-border transition-all duration-300`}>
-            <div className={`flex items-center ${isDesktopCollapsed ? 'justify-center' : 'gap-3'}`}>
-              <img
-                src="/manus-storage/hust-sociology-logo_1803912d.webp"
-                alt="华中科技大学社会学院"
-                className="w-12 h-12 object-contain"
-              />
-              {!isDesktopCollapsed && (
-                <div>
-                  <h1 className="text-sm font-bold text-sidebar-foreground">社会学院</h1>
-                  <p className="text-xs text-muted-foreground">信息平台</p>
-                </div>
-              )}
+            <div className={`flex items-center justify-between`}>
+              <div className={`flex items-center ${isDesktopCollapsed ? 'justify-center' : 'gap-3'} flex-1`}>
+                <img
+                  src="/manus-storage/hust-sociology-logo_1803912d.webp"
+                  alt="华中科技大学社会学院"
+                  className="w-12 h-12 object-contain"
+                />
+                {!isDesktopCollapsed && (
+                  <div>
+                    <h1 className="text-sm font-bold text-sidebar-foreground">社会学院</h1>
+                    <p className="text-xs text-muted-foreground">信息平台</p>
+                  </div>
+                )}
+              </div>
+              
+              {/* Desktop collapse button - moved to top */}
+              <button
+                onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
+                className="hidden lg:flex items-center justify-center p-1.5 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent transition-colors flex-shrink-0"
+                title={isDesktopCollapsed ? '展开侧边栏' : '收起侧边栏'}
+              >
+                <ChevronLeft className={`w-5 h-5 transition-transform duration-300 ${isDesktopCollapsed ? 'rotate-180' : ''}`} />
+              </button>
             </div>
           </div>
 
@@ -147,17 +158,6 @@ export default function Sidebar() {
                 <p>社会学院 2026</p>
               </>
             )}
-          </div>
-
-          {/* Desktop collapse button */}
-          <div className="hidden lg:flex px-3 pb-4">
-            <button
-              onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
-              className="w-full flex items-center justify-center p-2 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
-              title={isDesktopCollapsed ? '展开侧边栏' : '收起侧边栏'}
-            >
-              <ChevronLeft className={`w-5 h-5 transition-transform duration-300 ${isDesktopCollapsed ? 'rotate-180' : ''}`} />
-            </button>
           </div>
         </div>
       </aside>
