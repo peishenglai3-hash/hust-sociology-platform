@@ -1,4 +1,4 @@
-import { BookOpen, FileText, Users, GraduationCap, Home, Menu, X } from 'lucide-react';
+import { Home, BookOpen, GraduationCap, FileText, Users, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 
@@ -108,25 +108,25 @@ export default function Sidebar() {
           {/* Navigation items */}
           <nav className="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
-                <a
-                  onClick={() => setIsOpen(false)}
-                  className={`
-                    flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200
-                    ${isActive(item.href)
-                      ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-md'
-                      : 'text-sidebar-foreground hover:bg-sidebar-accent'
-                    }
-                  `}
-                >
-                  <span className="flex-shrink-0">{item.icon}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium text-sm">{item.label}</div>
-                    {item.description && (
-                      <div className="text-xs opacity-75 truncate">{item.description}</div>
-                    )}
-                  </div>
-                </a>
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className={`
+                  flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 block
+                  ${isActive(item.href)
+                    ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-md'
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent'
+                  }
+                `}
+              >
+                <span className="flex-shrink-0">{item.icon}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-medium text-sm">{item.label}</div>
+                  {item.description && (
+                    <div className="text-xs opacity-75 truncate">{item.description}</div>
+                  )}
+                </div>
               </Link>
             ))}
           </nav>

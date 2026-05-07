@@ -69,6 +69,28 @@ const resources: AcademicResource[] = [
     link: 'https://pan.quark.cn/s/b0840174d1c2',
     icon: <BookOpen className="w-5 h-5" />,
   },
+  {
+    id: 'max-weber',
+    title: '马克斯韦伯专题研究',
+    description: '深入探讨马克斯韦伯的社会学理论，包括官僚制理论、新教伦理与资本主义精神等经典著作，是理解现代社会的关键',
+    category: '经典理论',
+    grade: '大一及以上',
+    author: '赖培胜',
+    contributorType: 'organizer',
+    link: 'https://pan.quark.cn/s/c2ad2b4e5333',
+    icon: <BookOpen className="w-5 h-5" />,
+  },
+  {
+    id: 'durkheim-classics',
+    title: '涂尔干经典著作',
+    description: '涂尔干社会学思想的完整资料库，涵盖社会分工、自杀论、宗教生活等核心著作，是学习社会学基础理论的必读文献',
+    category: '经典理论',
+    grade: '大一及以上',
+    author: '赖培胜',
+    contributorType: 'organizer',
+    link: 'https://pan.quark.cn/s/8fda6cc66071',
+    icon: <BookOpen className="w-5 h-5" />,
+  },
 ];
 export default function Academic() {
   return (

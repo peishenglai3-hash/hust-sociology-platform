@@ -20,11 +20,9 @@ export default function ModulePage({
       {/* Header */}
       <div className="border-b border-border bg-secondary/20">
         <div className="container mx-auto px-4 py-8">
-          <Link href="/">
-            <a className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-6">
-              <ArrowLeft className="w-4 h-4" />
-              返回首页
-            </a>
+          <Link href="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-6">
+            <ArrowLeft className="w-4 h-4" />
+            返回首页
           </Link>
 
           <div className="flex items-start gap-4">

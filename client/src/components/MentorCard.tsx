@@ -117,11 +117,9 @@ export default function MentorCard({ mentor }: MentorCardProps) {
           >
             {isExpanded ? '收起' : '详情'}
           </button>
-          <Link href={`/mentor/${mentor.id}`}>
-            <a className="flex-1 flex items-center justify-center gap-1 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded transition-colors">
-              查看全部
-              <ArrowRight className="w-3 h-3" />
-            </a>
+          <Link href={`/mentor/${mentor.id}`} className="flex-1 flex items-center justify-center gap-1 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded transition-colors">
+            查看全部
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
       </div>
