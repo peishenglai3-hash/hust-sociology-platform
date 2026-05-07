@@ -120,15 +120,33 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: Image/Visual */}
-            <div className="relative h-96 lg:h-full min-h-96">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-transparent rounded-2xl border border-border/50 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg">
-                    <BookOpen className="w-16 h-16 text-white" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">学院Logo</h3>
-                  <p className="text-sm text-muted-foreground">华中科技大学社会学院</p>
+            {/* Right: Virtual Character */}
+            <div className="relative h-96 lg:h-full min-h-96 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-indigo-50/20 to-transparent rounded-2xl border border-border/30 overflow-hidden">
+                {/* Decorative background pattern */}
+                <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full blur-2xl" />
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl" />
+              </div>
+              
+              {/* Character Container */}
+              <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
+                {/* Character Image */}
+                <div className="mb-6 transform hover:scale-105 transition-transform duration-300">
+                  <img 
+                    src="/manus-storage/ChatGPTImage2026年5月7日13_12_32_a75be939.jpeg"
+                    alt="社会学院数字化管理平台导师小会"
+                    className="h-80 object-contain drop-shadow-lg"
+                  />
+                </div>
+                
+                {/* Character Info Card */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-border/50 shadow-lg max-w-xs">
+                  <p className="text-sm text-foreground font-medium text-center">
+                    👋 我是<span className="text-primary font-semibold">导师小会</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground text-center mt-2">
+                    社会学院数字化管理平台的虚拟助手，为你解答平台使用问题
+                  </p>
                 </div>
               </div>
             </div>
