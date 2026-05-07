@@ -1,4 +1,4 @@
-import { Home, BookOpen, GraduationCap, FileText, Users, Menu, X } from 'lucide-react';
+import { Home, BookOpen, GraduationCap, FileText, Users, Menu, X, ChevronLeft } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 
@@ -49,7 +49,8 @@ const navItems: NavItem[] = [
 ];
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
   const [location] = useLocation();
 
   const isActive = (href: string) => {
@@ -64,44 +65,48 @@ export default function Sidebar() {
       {/* Mobile menu button */}
       <div className="fixed top-4 left-4 z-50 lg:hidden">
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
           className="p-2 rounded-lg bg-white border border-border hover:bg-secondary transition-colors shadow-md"
           aria-label="Toggle menu"
         >
-          {isOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
+          {isMobileOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
         </button>
       </div>
 
       {/* Overlay for mobile */}
-      {isOpen && (
+      {isMobileOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-          onClick={() => setIsOpen(false)}
+          onClick={() => setIsMobileOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
         className={`
-          fixed left-0 top-0 h-screen w-64 bg-sidebar border-r border-sidebar-border
-          transform transition-transform duration-300 ease-in-out z-40
+          fixed left-0 top-0 h-screen bg-sidebar border-r border-sidebar-border
+          transform transition-all duration-300 ease-in-out z-40
           lg:translate-x-0 lg:static lg:h-auto lg:border-r
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${isDesktopCollapsed ? 'lg:w-20' : 'lg:w-64'}
+          w-64
         `}
       >
         <div className="flex flex-col h-full pt-20 lg:pt-6">
           {/* Logo section */}
-          <div className="px-6 pb-8 border-b border-sidebar-border">
-            <div className="flex items-center gap-3">
+          <div className={`${isDesktopCollapsed ? 'px-3' : 'px-6'} pb-8 border-b border-sidebar-border transition-all duration-300`}>
+            <div className={`flex items-center ${isDesktopCollapsed ? 'justify-center' : 'gap-3'}`}>
               <img
                 src="/manus-storage/hust-sociology-logo_1803912d.webp"
                 alt="华中科技大学社会学院"
                 className="w-12 h-12 object-contain"
               />
-              <div>
-                <h1 className="text-sm font-bold text-sidebar-foreground">社会学院</h1>
-                <p className="text-xs text-muted-foreground">信息平台</p>
-              </div>
+              {!isDesktopCollapsed && (
+                <div>
+                  <h1 className="text-sm font-bold text-sidebar-foreground">社会学院</h1>
+                  <p className="text-xs text-muted-foreground">信息平台</p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -111,36 +116,54 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setIsOpen(false)}
+                onClick={() => setIsMobileOpen(false)}
                 className={`
-                  flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 block
+                  flex items-center ${isDesktopCollapsed ? 'justify-center' : 'gap-3'} px-4 py-3 rounded-lg transition-all duration-200 block
                   ${isActive(item.href)
                     ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-md'
                     : 'text-sidebar-foreground hover:bg-sidebar-accent'
                   }
                 `}
+                title={isDesktopCollapsed ? item.label : undefined}
               >
                 <span className="flex-shrink-0">{item.icon}</span>
-                <div className="flex-1 min-w-0">
-                  <div className="font-medium text-sm">{item.label}</div>
-                  {item.description && (
-                    <div className="text-xs opacity-75 truncate">{item.description}</div>
-                  )}
-                </div>
+                {!isDesktopCollapsed && (
+                  <div className="flex-1 min-w-0">
+                    <div className="font-medium text-sm">{item.label}</div>
+                    {item.description && (
+                      <div className="text-xs opacity-75 truncate">{item.description}</div>
+                    )}
+                  </div>
+                )}
               </Link>
             ))}
           </nav>
 
           {/* Footer info */}
-          <div className="px-6 py-4 border-t border-sidebar-border text-xs text-muted-foreground">
-            <p>华中科技大学</p>
-            <p>社会学院 2026</p>
+          <div className={`${isDesktopCollapsed ? 'px-3' : 'px-6'} py-4 border-t border-sidebar-border text-xs text-muted-foreground transition-all duration-300`}>
+            {!isDesktopCollapsed && (
+              <>
+                <p>华中科技大学</p>
+                <p>社会学院 2026</p>
+              </>
+            )}
+          </div>
+
+          {/* Desktop collapse button */}
+          <div className="hidden lg:flex px-3 pb-4">
+            <button
+              onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
+              className="w-full flex items-center justify-center p-2 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
+              title={isDesktopCollapsed ? '展开侧边栏' : '收起侧边栏'}
+            >
+              <ChevronLeft className={`w-5 h-5 transition-transform duration-300 ${isDesktopCollapsed ? 'rotate-180' : ''}`} />
+            </button>
           </div>
         </div>
       </aside>
 
       {/* Main content wrapper */}
-      <div className="lg:ml-64" />
+      <div className={`hidden lg:block transition-all duration-300 ${isDesktopCollapsed ? 'lg:ml-20' : 'lg:ml-64'}`} />
     </>
   );
 }
