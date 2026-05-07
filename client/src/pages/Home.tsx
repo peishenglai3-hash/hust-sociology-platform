@@ -131,11 +131,16 @@ export default function Home() {
               {/* Character Container */}
               <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
                 {/* Character Image */}
-                <div className="mb-6 transform hover:scale-105 transition-transform duration-300">
+                <div className="mb-6 transform hover:scale-105 transition-transform duration-300 flex justify-center">
                   <img 
-                    src="/manus-storage/ChatGPTImage2026年5月7日13_12_32_a75be939.jpeg"
+                    src="/manus-storage/mentor-xiaohui_7ebee2c4.jpeg"
                     alt="社会学院数字化管理平台导师小会"
-                    className="h-80 object-contain drop-shadow-lg"
+                    className="h-80 w-auto object-contain drop-shadow-lg"
+                    style={{ maxWidth: '100%', height: 'auto' }}
+                    onError={(e) => {
+                      console.error('Failed to load character image:', e);
+                      (e.target as HTMLImageElement).style.display = 'none';
+                    }}
                   />
                 </div>
                 
