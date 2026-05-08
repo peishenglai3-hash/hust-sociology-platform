@@ -16,11 +16,43 @@ import Mentors from "./pages/Mentors";
 import Guide from "./pages/Guide";
 import Calendar from "./pages/Calendar";
 import MentorDetail from "./pages/MentorDetail";
+import ChatWindow from "./components/ChatWindow";
+import ChatDemo from "./pages/ChatDemo";
 
 function Router() {
   const { user } = useAuth();
 
-  // 如果未登录，只显示登录页
+  // 演示路由无需认证
+  return (
+    <Switch>
+      <Route path="/chat-demo" component={ChatDemo} />
+      {/* 如果未登录，只显示登录页 */}
+      {!user && (
+        <>
+          <Route path="/login" component={Login} />
+          <Route component={Login} />
+        </>
+      )}
+      {/* 已登录，显示完整应用 */}
+      {user && (
+        <>
+          <Route path="/" component={Home} />
+          <Route path="/academic" component={Academic} />
+          <Route path="/review" component={Review} />
+          <Route path="/policies" component={Policies} />
+          <Route path="/mentors" component={Mentors} />
+          <Route path="/mentor/:id" component={MentorDetail} />
+          <Route path="/guide" component={Guide} />
+          <Route path="/calendar" component={Calendar} />
+          <Route path="/404" component={NotFound} />
+          <Route component={NotFound} />
+        </>
+      )}
+    </Switch>
+  );
+
+  // 原始逻辑（已注释）
+  /*
   if (!user) {
     return (
       <Switch>
@@ -30,30 +62,7 @@ function Router() {
     );
   }
 
-  // 已登录，显示完整应用
-  return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <Header />
-        <main className="flex-1">
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/academic" component={Academic} />
-            <Route path="/review" component={Review} />
-            <Route path="/policies" component={Policies} />
-            <Route path="/mentors" component={Mentors} />
-            <Route path="/mentor/:id" component={MentorDetail} />
-            <Route path="/guide" component={Guide} />
-            <Route path="/calendar" component={Calendar} />
-            <Route path="/404" component={NotFound} />
-            {/* Final fallback route */}
-            <Route component={NotFound} />
-          </Switch>
-        </main>
-      </div>
-    </div>
-  );
+  */
 }
 
 // NOTE: About Theme
