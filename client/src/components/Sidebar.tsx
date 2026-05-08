@@ -1,4 +1,4 @@
-import { Home, BookOpen, GraduationCap, FileText, Users, Menu, X, ChevronLeft } from 'lucide-react';
+import { Home, BookOpen, GraduationCap, FileText, Users, Menu, X, ChevronLeft, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 
@@ -45,6 +45,12 @@ const navItems: NavItem[] = [
     href: '/guide',
     icon: <BookOpen className="w-5 h-5" />,
     description: '学习生活建议'
+  },
+  {
+    label: '社小会聊天',
+    href: '/chat',
+    icon: <MessageCircle className="w-5 h-5" />,
+    description: '与AI助手对话'
   }
 ];
 

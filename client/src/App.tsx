@@ -18,6 +18,7 @@ import Calendar from "./pages/Calendar";
 import MentorDetail from "./pages/MentorDetail";
 import ChatWindow from "./components/ChatWindow";
 import ChatDemo from "./pages/ChatDemo";
+import Chat from "./pages/Chat";
 
 function Router() {
   const { user } = useAuth();
@@ -26,6 +27,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/chat-demo" component={ChatDemo} />
+      <Route path="/chat" component={Chat} />
       {/* 如果未登录，只显示登录页 */}
       {!user && (
         <>
