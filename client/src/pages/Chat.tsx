@@ -5,7 +5,7 @@ export default function Chat() {
     <div className="flex flex-col h-full">
       {/* 页面标题区域 */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-border px-6 py-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold text-foreground mb-2">社小会聊天</h1>
           <p className="text-muted-foreground">与社会学院的虚拟助手进行实时对话交互</p>
         </div>
@@ -13,7 +13,7 @@ export default function Chat() {
 
       {/* 主要内容区域 */}
       <div className="flex-1 overflow-hidden bg-background">
-        <div className="h-full max-w-4xl mx-auto px-6 py-8">
+        <div className="h-full max-w-6xl mx-auto px-6 py-8">
           {/* 聊天窗口 - 全屏显示 */}
           <div className="h-full bg-white rounded-lg border border-border shadow-sm overflow-hidden">
             <ChatWindow />
@@ -23,7 +23,7 @@ export default function Chat() {
 
       {/* 功能说明区域 */}
       <div className="bg-blue-50 border-t border-border px-6 py-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex gap-3">
               <div className="flex-shrink-0">

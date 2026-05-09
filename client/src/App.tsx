@@ -16,55 +16,53 @@ import Mentors from "./pages/Mentors";
 import Guide from "./pages/Guide";
 import Calendar from "./pages/Calendar";
 import MentorDetail from "./pages/MentorDetail";
-import ChatWindow from "./components/ChatWindow";
 import ChatDemo from "./pages/ChatDemo";
 import Chat from "./pages/Chat";
 
 function Router() {
   const { user } = useAuth();
 
-  // 演示路由无需认证
-  return (
-    <Switch>
-      <Route path="/chat-demo" component={ChatDemo} />
-      <Route path="/chat" component={Chat} />
-      {/* 如果未登录，只显示登录页 */}
-      {!user && (
-        <>
-          <Route path="/login" component={Login} />
-          <Route component={Login} />
-        </>
-      )}
-      {/* 已登录，显示完整应用 */}
-      {user && (
-        <>
-          <Route path="/" component={Home} />
-          <Route path="/academic" component={Academic} />
-          <Route path="/review" component={Review} />
-          <Route path="/policies" component={Policies} />
-          <Route path="/mentors" component={Mentors} />
-          <Route path="/mentor/:id" component={MentorDetail} />
-          <Route path="/guide" component={Guide} />
-          <Route path="/calendar" component={Calendar} />
-          <Route path="/404" component={NotFound} />
-          <Route component={NotFound} />
-        </>
-      )}
-    </Switch>
-  );
-
-  // 原始逻辑（已注释）
-  /*
+  // 如果未登录，只显示登录页和演示页面
   if (!user) {
     return (
       <Switch>
+        <Route path="/chat-demo" component={ChatDemo} />
         <Route path="/login" component={Login} />
         <Route component={Login} />
       </Switch>
     );
   }
 
-  */
+  // 已登录，显示完整应用（包含侧边栏）
+  return (
+    <div className="flex h-screen bg-background">
+      {/* 侧边栏 */}
+      <Sidebar />
+      
+      {/* 主内容区域 */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* 顶部导航栏 */}
+        <Header />
+        
+        {/* 页面内容 */}
+        <main className="flex-1 overflow-auto">
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/academic" component={Academic} />
+            <Route path="/review" component={Review} />
+            <Route path="/policies" component={Policies} />
+            <Route path="/mentors" component={Mentors} />
+            <Route path="/mentor/:id" component={MentorDetail} />
+            <Route path="/guide" component={Guide} />
+            <Route path="/calendar" component={Calendar} />
+            <Route path="/chat" component={Chat} />
+            <Route path="/404" component={NotFound} />
+            <Route component={NotFound} />
+          </Switch>
+        </main>
+      </div>
+    </div>
+  );
 }
 
 // NOTE: About Theme

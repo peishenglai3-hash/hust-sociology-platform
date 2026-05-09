@@ -1696,7 +1696,17 @@ export const getCurrentUser = (): VerifiedStudent | null => {
   const session = getAuthSession();
   if (!session) return null;
   
-  return verifiedStudents.find(
+  const user = verifiedStudents.find(
     s => s.studentId === session.studentId && s.name === session.name
-  ) || null;
+  );
+  
+  if (user && typeof user.joinDate === 'string') {
+    // 如果joinDate是字符串，转换为Date对象
+    return {
+      ...user,
+      joinDate: new Date(user.joinDate as any)
+    };
+  }
+  
+  return user || null;
 };

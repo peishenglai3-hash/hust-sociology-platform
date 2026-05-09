@@ -10,7 +10,6 @@ export default function Login() {
   const [studentId, setStudentId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [isRegistering, setIsRegistering] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,17 +40,11 @@ export default function Login() {
       // 模拟网络延迟
       await new Promise(resolve => setTimeout(resolve, 500));
 
-      // 尝试验证现有学生
+      // 尝试验证现有学生，如果不存在则自动注册
       let student = verifyStudent(name.trim(), studentId.trim());
 
       if (!student) {
-        // 如果不存在，则注册新学生
-        if (!isRegistering) {
-          setIsRegistering(true);
-          setError('');
-          setIsLoading(false);
-          return;
-        }
+        // 自动注册新学生
         student = registerStudent(name.trim(), studentId.trim());
       }
 
@@ -83,12 +76,10 @@ export default function Login() {
           {/* Title */}
           <div>
             <h2 className="text-2xl font-semibold text-foreground mb-2">
-              {isRegistering ? '首次使用，请注册' : '学生身份验证'}
+              学生身份验证
             </h2>
             <p className="text-sm text-muted-foreground">
-              {isRegistering
-                ? '输入你的真实信息以创建账户'
-                : '输入你的姓名和学号以验证身份'}
+              输入你的姓名和学号以验证身份
             </p>
           </div>
 
@@ -116,7 +107,6 @@ export default function Login() {
                   onChange={(e) => {
                     setName(e.target.value);
                     setError('');
-                    setIsRegistering(false);
                   }}
                   className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-input border border-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all"
                   disabled={isLoading}
@@ -138,7 +128,6 @@ export default function Login() {
                   onChange={(e) => {
                     setStudentId(e.target.value.toUpperCase());
                     setError('');
-                    setIsRegistering(false);
                   }}
                   className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-input border border-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all"
                   disabled={isLoading}
@@ -159,10 +148,8 @@ export default function Login() {
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <span className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin" />
-                  {isRegistering ? '创建账户中...' : '验证中...'}
+                  验证中...
                 </span>
-              ) : isRegistering ? (
-                '创建账户'
               ) : (
                 '验证身份'
               )}
