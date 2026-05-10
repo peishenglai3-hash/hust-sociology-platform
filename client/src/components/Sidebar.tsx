@@ -7,6 +7,7 @@ interface NavItem {
   href: string;
   icon: React.ReactNode;
   description?: string;
+  external?: boolean;
 }
 
 const navItems: NavItem[] = [
@@ -48,9 +49,10 @@ const navItems: NavItem[] = [
   },
   {
     label: '社小会聊天',
-    href: '/chat',
+    href: 'http://118.178.110.16',
     icon: <MessageCircle className="w-5 h-5" />,
-    description: '与AI助手对话'
+    description: '与AI助手对话',
+    external: true
   }
 ];
 
@@ -129,31 +131,59 @@ export default function Sidebar() {
 
           {/* Navigation items */}
           <nav className="flex-1 px-3 py-6 space-y-2 overflow-y-auto">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMobileOpen(false)}
-                className={`
-                  flex items-center ${isDesktopCollapsed ? 'justify-center' : 'gap-3'} px-4 py-3 rounded-lg transition-all duration-200 block
-                  ${isActive(item.href)
-                    ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-md'
-                    : 'text-sidebar-foreground hover:bg-sidebar-accent'
-                  }
-                `}
-                title={isDesktopCollapsed ? item.label : undefined}
-              >
-                <span className="flex-shrink-0">{item.icon}</span>
-                {!isDesktopCollapsed && (
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium text-sm">{item.label}</div>
-                    {item.description && (
-                      <div className="text-xs opacity-75 truncate">{item.description}</div>
+            {navItems.map((item) => {
+              if (item.external) {
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileOpen(false)}
+                    className={`
+                      flex items-center ${isDesktopCollapsed ? 'justify-center' : 'gap-3'} px-4 py-3 rounded-lg transition-all duration-200 block
+                      text-sidebar-foreground hover:bg-sidebar-accent
+                    `}
+                    title={isDesktopCollapsed ? item.label : undefined}
+                  >
+                    <span className="flex-shrink-0">{item.icon}</span>
+                    {!isDesktopCollapsed && (
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium text-sm">{item.label}</div>
+                        {item.description && (
+                          <div className="text-xs opacity-75 truncate">{item.description}</div>
+                        )}
+                      </div>
                     )}
-                  </div>
-                )}
-              </Link>
-            ))}
+                  </a>
+                );
+              }
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileOpen(false)}
+                  className={`
+                    flex items-center ${isDesktopCollapsed ? 'justify-center' : 'gap-3'} px-4 py-3 rounded-lg transition-all duration-200 block
+                    ${isActive(item.href)
+                      ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-md'
+                      : 'text-sidebar-foreground hover:bg-sidebar-accent'
+                    }
+                  `}
+                  title={isDesktopCollapsed ? item.label : undefined}
+                >
+                  <span className="flex-shrink-0">{item.icon}</span>
+                  {!isDesktopCollapsed && (
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-sm">{item.label}</div>
+                      {item.description && (
+                        <div className="text-xs opacity-75 truncate">{item.description}</div>
+                      )}
+                    </div>
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Footer info */}
